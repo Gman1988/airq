@@ -35,3 +35,27 @@ pip is installed by default in Raspbian Desktop images (but not Raspbian Lite). 
 ```
 sudo apt-get install python3-pip
 ```
+
+## Prepare for Cloud connection
+```
+git clone https://github.com/matzie5/airq
+cd airq
+```
+
+Make sure the required core packages are all installed
+```
+chmod +x initialsoftware.sh
+./initialsoftware.sh
+```
+
+### Create a security certificate
+In order to communicate with Google Cloud, a security certificate must be generated and then registered with IoT core.
+```
+chmod +x generate_keys.sh
+./generate_keys.sh
+```
+After the certificate has been created you can copy it to your localhost into the current folder:
+```
+scp pi@192.168.1.29:/home/pi/.ssh/ec_public.pem .
+```
+
