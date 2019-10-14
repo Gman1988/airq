@@ -59,3 +59,18 @@ After the certificate has been created you can copy it to your localhost into th
 scp pi@192.168.1.29:/home/pi/.ssh/ec_public.pem .
 ```
 
+## Run the program
+If you aren't in the /home/pi/airq directory on the Raspberry Pi, move there first
+```
+cd /home/pi/airq
+```
+Start the heart rate script by changing the following to match your project, registry and device
+```
+python airquality.py --project_id=myproject --registry_id=myregistry --device_id=mydevice
+```
+e.g.
+```
+python airquality.py --project_id=iot-airquality --registry_id=airquality --device_id=zienerAirQ
+```
+You should see the terminal window echo the airquality about every 10 seconds. With data flowing, you can skip to the next section.
+
