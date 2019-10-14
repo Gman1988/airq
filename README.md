@@ -27,3 +27,11 @@ ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 country=PL
 ```
+
+### Install pip
+Rasbpian Lite doesn't include the pacNot all Python packages are available in the Raspbian archives, and those that are can sometimes be out-of-date. If you can't find a suitable version in the Raspbian archives, you can install packages from the Python Package Index (PyPI). To do so, use the pip tool.
+
+pip is installed by default in Raspbian Desktop images (but not Raspbian Lite). You can install it with apt:
+```
+sudo apt-get install python3-pip
+```
