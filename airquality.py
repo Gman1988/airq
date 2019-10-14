@@ -54,7 +54,7 @@ def parse_command_line_args():
             default='ES256',
             help='Which encryption algorithm to use to generate the JWT.')
     parser.add_argument(
-            '--cloud_region', default='us-central1', help='GCP cloud region')
+            '--cloud_region', default='europe-west1', help='GCP cloud region')
     parser.add_argument(
             '--ca_certs',
             default='../.ssh/roots.pem',
