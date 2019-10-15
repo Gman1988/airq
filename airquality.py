@@ -112,7 +112,7 @@ def createJSON(id, unique_id, timestamp, pmtwofive, pmten):
     json_str = json.dumps(data)
     return json_str
 
-def sensor_wake():
+def sensor_wake(ser):
     bytes = ['\xaa', #head
     '\xb4', #command 1
     '\x06', #data byte 1
@@ -137,7 +137,7 @@ def sensor_wake():
         ser.write(b)
         
         
-def sensor_sleep():
+def sensor_sleep(ser):
     bytes = ['\xaa', #head
     '\xb4', #command 1
     '\x06', #data byte 1
