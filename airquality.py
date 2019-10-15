@@ -114,24 +114,24 @@ def createJSON(id, unique_id, timestamp, pmtwofive, pmten):
 
 def sensor_wake(ser):
     bytes = ['\xaa', #head
-    '\xb4', #command 1
-    '\x06', #data byte 1
-    '\x01', #data byte 2 (set mode)
-    '\x01', #data byte 3 (sleep)
-    '\x00', #data byte 4
-    '\x00', #data byte 5
-    '\x00', #data byte 6
-    '\x00', #data byte 7
-    '\x00', #data byte 8
-    '\x00', #data byte 9
-    '\x00', #data byte 10
-    '\x00', #data byte 11
-    '\x00', #data byte 12
-    '\x00', #data byte 13
-    '\xff', #data byte 14 (device id byte 1)
-    '\xff', #data byte 15 (device id byte 2)
-    '\x05', #checksum
-    '\xab'] #tail
+    b'\xb4', #command 1
+    b'\x06', #data byte 1
+    b'\x01', #data byte 2 (set mode)
+    b'\x01', #data byte 3 (sleep)
+    b'\x00', #data byte 4
+    b'\x00', #data byte 5
+    b'\x00', #data byte 6
+    b'\x00', #data byte 7
+    b'\x00', #data byte 8
+    b'\x00', #data byte 9
+    b'\x00', #data byte 10
+    b'\x00', #data byte 11
+    b'\x00', #data byte 12
+    b'\x00', #data byte 13
+    b'\xff', #data byte 14 (device id byte 1)
+    b'\xff', #data byte 15 (device id byte 2)
+    b'\x05', #checksum
+    b'\xab'] #tail
     
     for b in bytes:
         ser.write(b)
@@ -139,24 +139,24 @@ def sensor_wake(ser):
         
 def sensor_sleep(ser):
     bytes = ['\xaa', #head
-    '\xb4', #command 1
-    '\x06', #data byte 1
-    '\x01', #data byte 2 (set mode)
-    '\x00', #data byte 3 (sleep)
-    '\x00', #data byte 4
-    '\x00', #data byte 5
-    '\x00', #data byte 6
-    '\x00', #data byte 7
-    '\x00', #data byte 8
-    '\x00', #data byte 9
-    '\x00', #data byte 10
-    '\x00', #data byte 11
-    '\x00', #data byte 12
-    '\x00', #data byte 13
-    '\xff', #data byte 14 (device id byte 1)
-    '\xff', #data byte 15 (device id byte 2)
-    '\x05', #checksum
-    '\xab'] #tail
+    b'\xb4', #command 1
+    b'\x06', #data byte 1
+    b'\x01', #data byte 2 (set mode)
+    b'\x00', #data byte 3 (sleep)
+    b'\x00', #data byte 4
+    b'\x00', #data byte 5
+    b'\x00', #data byte 6
+    b'\x00', #data byte 7
+    b'\x00', #data byte 8
+    b'\x00', #data byte 9
+    b'\x00', #data byte 10
+    b'\x00', #data byte 11
+    b'\x00', #data byte 12
+    b'\x00', #data byte 13
+    b'\xff', #data byte 14 (device id byte 1)
+    b'\xff', #data byte 15 (device id byte 2)
+    b'\x05', #checksum
+    b'\xab'] #tail
     
     for b in bytes:
         ser.write(b)
