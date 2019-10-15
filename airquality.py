@@ -134,11 +134,11 @@ def sensor_wake():
     '\xab'] #tail
     
     for b in bytes:
-	ser.write(b)
+        ser.write(b)
         
         
- def sensor_sleep():
-     bytes = ['\xaa', #head
+def sensor_sleep():
+    bytes = ['\xaa', #head
     '\xb4', #command 1
     '\x06', #data byte 1
     '\x01', #data byte 2 (set mode)
@@ -159,7 +159,7 @@ def sensor_wake():
     '\xab'] #tail
     
     for b in bytes:
-	ser.write(b)
+        ser.write(b)
          
 
 def main():
