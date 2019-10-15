@@ -164,9 +164,10 @@ def sensor_sleep(ser):
          
 def sleep_and_count(seconds):
     for i in range(seconds,0,-1):
-        print(i, '> ', end='')
-        sys.stdout.flush()
+        print('Waiting for', i, 'seconds ... ', end='\r')
         time.sleep(1)
+    print()
+
 		
 def main():
     args = parse_command_line_args()
@@ -211,7 +212,7 @@ def main():
         try:
           sensor_wake(ser)
           print("Sensor enabled.")
-          sleep_and_count(20)
+          sleep_and_count(30)
           data = []
           for index in range(0,10):
             datum = ser.read()
@@ -224,7 +225,7 @@ def main():
           client.publish(_MQTT_TOPIC, payload, qos=1)
           print("{}\n".format(payload))
           sensor_sleep(ser)
-          sleep_and_count(5 * 60 - 20)
+          sleep_and_count(5 * 60 - 30)
         except Exception as e:
           print("There was an error")
           print (e)
