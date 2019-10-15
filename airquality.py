@@ -1,4 +1,3 @@
-  
 # Copyright 2019 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -113,6 +112,56 @@ def createJSON(id, unique_id, timestamp, pmtwofive, pmten):
     json_str = json.dumps(data)
     return json_str
 
+def sensor_wake():
+    bytes = ['\xaa', #head
+    '\xb4', #command 1
+    '\x06', #data byte 1
+    '\x01', #data byte 2 (set mode)
+    '\x01', #data byte 3 (sleep)
+    '\x00', #data byte 4
+    '\x00', #data byte 5
+    '\x00', #data byte 6
+    '\x00', #data byte 7
+    '\x00', #data byte 8
+    '\x00', #data byte 9
+    '\x00', #data byte 10
+    '\x00', #data byte 11
+    '\x00', #data byte 12
+    '\x00', #data byte 13
+    '\xff', #data byte 14 (device id byte 1)
+    '\xff', #data byte 15 (device id byte 2)
+    '\x05', #checksum
+    '\xab'] #tail
+    
+    for b in bytes:
+	ser.write(b)
+        
+        
+ def sensor_sleep():
+     bytes = ['\xaa', #head
+    '\xb4', #command 1
+    '\x06', #data byte 1
+    '\x01', #data byte 2 (set mode)
+    '\x00', #data byte 3 (sleep)
+    '\x00', #data byte 4
+    '\x00', #data byte 5
+    '\x00', #data byte 6
+    '\x00', #data byte 7
+    '\x00', #data byte 8
+    '\x00', #data byte 9
+    '\x00', #data byte 10
+    '\x00', #data byte 11
+    '\x00', #data byte 12
+    '\x00', #data byte 13
+    '\xff', #data byte 14 (device id byte 1)
+    '\xff', #data byte 15 (device id byte 2)
+    '\x05', #checksum
+    '\xab'] #tail
+    
+    for b in bytes:
+	ser.write(b)
+         
+
 def main():
     args = parse_command_line_args()
     project_id = args.project_id
@@ -154,6 +203,9 @@ def main():
       while time.time() < jwt_refresh: # as long as the JWT isn't ready to expire, otherwise break this loop so the JWT gets refreshed
         # Continuously monitor for airquality data
         try:
+	  sensor_wake()
+	  print("Sensor enabled.")
+	  time.sleep(10)
           data = []
           for index in range(0,10):
             datum = ser.read()
@@ -165,7 +217,8 @@ def main():
           payload = createJSON(sensorID, uniqueID, currentTime, pmtwofive, pmten)
           client.publish(_MQTT_TOPIC, payload, qos=1)
           print("{}\n".format(payload))
-          time.sleep(10)
+	  sensor_sleep()
+          time.sleep(20)
         except Exception as e:
           print("There was an error")
           print (e)
