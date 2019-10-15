@@ -203,7 +203,7 @@ def main():
       while time.time() < jwt_refresh: # as long as the JWT isn't ready to expire, otherwise break this loop so the JWT gets refreshed
         # Continuously monitor for airquality data
         try:
-          sensor_wake()
+          sensor_wake(ser)
           print("Sensor enabled.")
           time.sleep(10)
           data = []
@@ -217,7 +217,7 @@ def main():
           payload = createJSON(sensorID, uniqueID, currentTime, pmtwofive, pmten)
           client.publish(_MQTT_TOPIC, payload, qos=1)
           print("{}\n".format(payload))
-          sensor_sleep()
+          sensor_sleep(ser)
           time.sleep(20)
         except Exception as e:
           print("There was an error")
