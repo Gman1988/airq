@@ -211,7 +211,7 @@ def main():
         try:
           sensor_wake(ser)
           print("Sensor enabled.")
-          sleep_and_count(10)
+          sleep_and_count(20)
           data = []
           for index in range(0,10):
             datum = ser.read()
@@ -224,7 +224,7 @@ def main():
           client.publish(_MQTT_TOPIC, payload, qos=1)
           print("{}\n".format(payload))
           sensor_sleep(ser)
-          sleep_and_count(20)
+          sleep_and_count(5 * 60 - 20)
         except Exception as e:
           print("There was an error")
           print (e)
