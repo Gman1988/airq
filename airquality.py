@@ -21,6 +21,7 @@ import uuid
 import serial
 import json
 import jwt
+import sys
 
 from tendo import singleton
 import paho.mqtt.client as mqtt
@@ -130,7 +131,7 @@ def sensor_wake(ser):
     b'\x00', #data byte 13
     b'\xff', #data byte 14 (device id byte 1)
     b'\xff', #data byte 15 (device id byte 2)
-    b'\x05', #checksum
+    b'\x06', #checksum
     b'\xab'] #tail
     
     for b in bytes:
@@ -161,7 +162,12 @@ def sensor_sleep(ser):
     for b in bytes:
         ser.write(b)
          
-
+def sleep_and_count(seconds):
+    for i in range(seconds,0,-1):
+        print(i, '> ', end='')
+        sys.stdout.flush()
+        time.sleep(1)
+		
 def main():
     args = parse_command_line_args()
     project_id = args.project_id
@@ -205,7 +211,7 @@ def main():
         try:
           sensor_wake(ser)
           print("Sensor enabled.")
-          time.sleep(10)
+          sleep_and_count(10)
           data = []
           for index in range(0,10):
             datum = ser.read()
@@ -218,7 +224,7 @@ def main():
           client.publish(_MQTT_TOPIC, payload, qos=1)
           print("{}\n".format(payload))
           sensor_sleep(ser)
-          time.sleep(20)
+          sleep_and_count(20)
         except Exception as e:
           print("There was an error")
           print (e)
