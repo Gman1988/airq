@@ -205,7 +205,7 @@ def main():
         try:
           sensor_wake()
 	  print("Sensor enabled.")
-	  time.sleep(10)
+          time.sleep(10)
           data = []
           for index in range(0,10):
             datum = ser.read()
