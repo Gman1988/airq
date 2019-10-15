@@ -204,7 +204,7 @@ def main():
         # Continuously monitor for airquality data
         try:
           sensor_wake()
-	  print("Sensor enabled.")
+          print("Sensor enabled.")
           time.sleep(10)
           data = []
           for index in range(0,10):
