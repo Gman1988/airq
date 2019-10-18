@@ -41,20 +41,20 @@ def parse_command_line_args():
             help='GCP cloud project name')
     parser.add_argument(
             '--registry_id', 
-	    required=True, 
-	    help='Cloud IoT Core registry id')
+	        required=True, 
+	        help='Cloud IoT Core registry id')
     parser.add_argument(
             '--device_id', 
-	    required=True, 
-	    help='Cloud IoT Core device id')
+	        required=True, 
+	        help='Cloud IoT Core device id')
     parser.add_argument(
             '--interval', 
-	    type=int
-        default=30, 
-	    help='Measurement interval between two samplings')
+            type=int,
+            default=30, 
+	        help='Measurement interval between two samplings')
     parser.add_argument(
             '--private_key_file',
-	    default='../.ssh/ec_private.pem',
+	        default='../.ssh/ec_private.pem',
             help='Path to private key file.')
     parser.add_argument(
             '--algorithm',
