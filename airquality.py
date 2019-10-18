@@ -48,6 +48,11 @@ def parse_command_line_args():
 	    required=True, 
 	    help='Cloud IoT Core device id')
     parser.add_argument(
+            '--interval', 
+	    type=int
+        default=30, 
+	    help='Measurement interval between two samplings')
+    parser.add_argument(
             '--private_key_file',
 	    default='../.ssh/ec_private.pem',
             help='Path to private key file.')
@@ -164,7 +169,9 @@ def sensor_sleep(ser):
          
 def sleep_and_count(seconds):
     for i in range(seconds,0,-1):
-        print('Waiting for', i, 'seconds ... ', end='\r')
+        remaining_seconds = i % 60
+        remaining_minutes = (i - remaining_seconds) / 60
+        print('Waiting for %d minutes and %d seconds ...' % (remaining_minutes, remaining_seconds), end='\r')
         time.sleep(1)
     print()
 
@@ -175,6 +182,7 @@ def main():
     gcp_location = args.cloud_region
     registry_id = args.registry_id
     device_id = args.device_id
+    interval = args.interval
     ssl_private_key_filepath = args.private_key_file
     ssl_algorithm = args.algorithm
     root_cert_filepath = args.ca_certs
@@ -225,7 +233,7 @@ def main():
           client.publish(_MQTT_TOPIC, payload, qos=1)
           print("{}\n".format(payload))
           sensor_sleep(ser)
-          sleep_and_count(5 * 60 - 30)
+          sleep_and_count(interval * 60 - 30)
         except Exception as e:
           print("There was an error")
           print (e)
