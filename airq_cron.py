@@ -216,11 +216,11 @@ def main():
         client.publish(_MQTT_TOPIC, payload, qos=1)
         print("{}\n".format(payload))
         sensor_sleep(ser)
-      except Exception as e:
+    except Exception as e:
         print("There was an error")
         print (e)
                        			
-      client.loop_stop()
+    client.loop_stop()
 
 if __name__ == '__main__':
 	main()
