@@ -215,7 +215,7 @@ def main():
         payload = createJSON(sensorID, uniqueID, currentTime, pmtwofive, pmten)
         client.publish(_MQTT_TOPIC, payload, qos=1)
         print("{}\n".format(payload))
-        sensor_sleep(ser)
+        # sensor_sleep(ser)
     except Exception as e:
         print("There was an error")
         print (e)
