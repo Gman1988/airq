@@ -74,3 +74,13 @@ python airquality.py --project_id=iot-airquality --registry_id=airquality --devi
 ```
 You should see the terminal window echo the airquality about every 10 seconds. With data flowing, you can skip to the next section.
 
+## Modify the program
+In the standard configuration we are using the USB port to control the device. We can take a shortcut here and connect the device directly to the serial port on the GPIO pins. For this step we need to [enable UART on the raspberry pi](https://www.raspberrypi.org/documentation/configuration/uart.md):
+```
+sudo echo "enable_uart=1" >> /boot/config.txt
+
+sudo nano /boot/cmdline.txt
+# Remove `console=serial0,115200`
+
+# Restart for changes to take effect
+sudo shutdown -r now
